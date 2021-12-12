@@ -22,7 +22,7 @@
 # include <unistd.h>
 /* -------------------------------------------------------------------------- */
 char	*get_next_line(int fd);
-int     is_buf_rd_all(ssize_t *start, ssize_t *char_read);
+char    *create_next_string(int fd, char *buf, int *full_line);
 
 /* -------------------------------------------------------------------------- */
 char	*ft_substr(char const *s, unsigned int start, size_t len);
