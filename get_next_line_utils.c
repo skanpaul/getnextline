@@ -42,19 +42,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 }
 
 /* ************************************************************************** */
-char	*have_endlinechar(char *buffer)
-{
-	int	i;
-
-	i = 0;
-	while ((buffer[i] != 0x0A) && (buffer[i] != '\0'))
-		i++;
-	if (buffer[i] == 0x0A)
-		return (&buffer[i]);
-	return (NULL);
-}
-
-/* ************************************************************************** */
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -115,4 +102,23 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
+/* ************************************************************************** */
+char	*ft_strdup(const char *s1)
+{
+	size_t	i;
+	size_t	mem_len;
+	char	*new;
 
+	mem_len = ft_strlen(s1) + 1;
+	new = (char *)malloc(mem_len * sizeof(char));
+	if (new == 0)
+		return (0);
+	i = 0;
+	while (s1[i] != '\0')
+	{
+		new[i] = s1[i];
+		i++;
+	}
+	new[i] = '\0';
+	return (new);
+}
