@@ -18,6 +18,11 @@ char	*get_next_line(int fd)
 	char			*old;
 	static char		buf[BUFFER_SIZE + 1];
 	static int		full_line = 1; // 0: line NOT complete | 1: line complete 
+
+	line = NULL;
+	new = NULL;
+	old = NULL;
+
 	// ---------------------------------------------------------
 	buf[BUFFER_SIZE] = '\0';
 	line = create_segment(fd, buf, &full_line); // ATTENTION, full_line est à tester
@@ -38,7 +43,8 @@ char	*get_next_line(int fd)
 			free (old);
 			free (new);
 			return (NULL);
-		}	
+		}
+			
 	}
 	return (line);		
 }
@@ -52,6 +58,7 @@ char *create_segment(int fd, char *buf, int *full_line)
 	static ssize_t	start = 10;
 	ssize_t			end;
 	static ssize_t	char_read = 10;
+	// size_t			len_substr;
 	// ---------------------------------------------------------
 	*full_line = 1;
 	// Est-ce que tout le buffer a été traité?
@@ -66,9 +73,16 @@ char *create_segment(int fd, char *buf, int *full_line)
 	end = start;
 	while ((buf[end] != 0x0A) && (end < (char_read - 1)))
 		end++;
+
+	// Calcul du nombre de caractere a extrair
+	// len_substr = (end - start + 1);
+	// if (buf[end] == 0x0A) 
+	// 	len_substr = end - start;
+
 	// Test si 'end' a dépassé le buffer
 	if (buf[end] != 0x0A)
 		*full_line = 0;
+
 	// Extrait la ligne trouvée (complète ou tronqué)
 	new = ft_substr_gnl(buf, start, (end - start + 1));
 	// Test si tous les caractère du buffer ont été traité
@@ -78,3 +92,9 @@ char *create_segment(int fd, char *buf, int *full_line)
 		start = ++end;			// SINON préparte le prochain START et END
 	return (new);	
 }
+
+
+
+/* ************************************************************************** */
+// free pointer and return null
+/* ************************************************************************** */
