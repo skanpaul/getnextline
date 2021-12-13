@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 	char			*new;			
 	char			*old;
 	static char		buf[BUFFER_SIZE + 1];
-	static int		full_line = 1; // 0: line NOT complete | 1: line complete 
+	int				full_line; // 0: line NOT complete | 1: line complete 
 
 	line = NULL;
 	new = NULL;
@@ -25,27 +25,26 @@ char	*get_next_line(int fd)
 
 	// ---------------------------------------------------------
 	buf[BUFFER_SIZE] = '\0';
-	line = create_segment(fd, buf, &full_line); // ATTENTION, full_line est à tester
-	if (!line)
-		return (NULL);
+	// ---------------------------------------------------------
+
+	full_line = 0;
+	line = ft_substr_gnl("", 0, 0);
 	while (full_line == 0)
 	{
-		old = line;
 		new = create_segment(fd, buf, &full_line);	
 		if (!new)
 		{
-			free (old);
-			return (NULL);
-		}	
-		line = ft_strjoin_gnl(old, new);
-		if (!line)
-		{
-			free (old);
-			free (new);
+			free (line);
 			return (NULL);
 		}
-			
+		old = line;
+		line = ft_strjoin_gnl(old, new);
+		free (old);
+		free (new);
+		if (!line)
+			return (NULL);
 	}
+
 	return (line);		
 }
 /* ************************************************************************** */
@@ -98,3 +97,62 @@ char *create_segment(int fd, char *buf, int *full_line)
 /* ************************************************************************** */
 // free pointer and return null
 /* ************************************************************************** */
+
+
+
+
+
+
+
+
+
+
+
+
+/* 	line = create_segment(fd, buf, &full_line); // ATTENTION, full_line est à tester
+	if (!line)
+		return (NULL);
+	while (full_line == 0)
+	{
+		old = line;
+		new = create_segment(fd, buf, &full_line);	
+		if (!new)
+		{
+			free (old);
+			return (NULL);
+		}	
+		line = ft_strjoin_gnl(old, new);
+		if (!line)
+		{
+		free (old);
+		free (new);
+			return (NULL);
+		}			
+	} */
+
+
+
+
+/* 	line = ft_substr_gnl("", 0, 0);
+	while ()
+	{
+		new = create_segment(fd, buf, &full_line);	
+		if (!new)
+		{
+			free (line);
+			return (NULL);
+		}
+
+		old = line;
+		line = ft_strjoin_gnl(old, new);
+		free (old);
+		free (new);
+		if (!line)
+			return (NULL);
+
+		if (full_line == 1)
+		{
+			full_line = 0;
+			break;
+		}
+	} */
