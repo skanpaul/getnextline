@@ -54,9 +54,9 @@ char	*create_segment(int fd, char *buf, int *line_done, ssize_t *char_read)
 			return (NULL);
 	}
 	end = start;
-	while ((buf[end] != 0x0A) && (end < (*char_read - 1)))
+	while ((buf[end] != '\n') && (end < (*char_read - 1)))
 		end++;
-	if (buf[end] == 0x0A)
+	if (buf[end] == '\n')
 		*line_done = 1;
 	new = ft_substr(buf, start, (end - start + 1));
 	if (end >= *char_read - 1)
@@ -83,10 +83,10 @@ char	*create_segment(int fd, char *buf, int *line_done, ssize_t *char_read)
 // 	}
 // 	// Cherche la fin de segment pour le "new" string
 // 	end = start;
-// 	while ((buf[end] != 0x0A) && (end < (*char_read - 1)))
+// 	while ((buf[end] != '\n') && (end < (*char_read - 1)))
 // 		end++;
 // 	// Si RETOUR-A-LA-LIGNE trouvé
-// 	if (buf[end] == 0x0A)
+// 	if (buf[end] == '\n')
 // 		*line_done = 1;	// Alors FIN-LIGNE trouvé 
 // 	// Extrait la ligne trouvée (complète ou tronqué)
 // 	new = ft_substr(buf, start, (end - start + 1));		// crée un "new" string 
