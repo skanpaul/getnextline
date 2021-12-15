@@ -13,33 +13,30 @@
 /* ************************************************************************** */
 char	*get_next_line(int fd)
 {
-	char			*line;
-	char			*new;
-	char			*old;
+	static t_gnl	g;
 	static char		buf[BUFFER_SIZE];
 	static ssize_t	char_read = BUFFER_SIZE;
-	int				line_done;
 
-	line_done = 0;
-	line = ft_substr("", 0, 0);
-	while (line_done == 0)
+	g.line_done = 0;
+	g.line = ft_substr("", 0, 0);
+	while (g.line_done == 0)
 	{
-		new = create_segment(fd, buf, &line_done, &char_read);
-		if (new == NULL)
+		g.new = create_segment(fd, buf, &g.line_done, &char_read);
+		if (g.new == NULL)
 		{
-			if ((char_read == 0) && (line[0] != '\0'))
-				return (line);
-			free (line);
+			if ((char_read == 0) && (g.line[0] != '\0'))
+				return (g.line);
+			free (g.line);
 			return (NULL);
 		}
-		old = line;
-		line = ft_strjoin(old, new);
-		free (old);
-		free (new);
-		if (!line)
+		g.old = g.line;
+		g.line = ft_strjoin(g.old, g.new);
+		free (g.old);
+		free (g.new);
+		if (!g.line)
 			return (NULL);
 	}
-	return (line);
+	return (g.line);
 }
 /* ************************************************************************** */
 
@@ -101,3 +98,9 @@ char	*create_segment(int fd, char *buf, int *line_done, ssize_t *char_read)
 // 	// ----------------------------------------------------------------------
 // 	return (new);	
 // }
+	// char			*line;
+	// char			*new;
+	// char			*old;
+	// static char		buf[BUFFER_SIZE];
+	// static ssize_t	char_read = BUFFER_SIZE;
+	// int				line_done;

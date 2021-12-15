@@ -20,6 +20,16 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <unistd.h>
+
+/* -------------------------------------------------------------------------- */
+typedef struct s_gnl
+{
+	char			*line;
+	char			*new;
+	char			*old;
+	int				line_done;
+}t_gnl;
+
 /* -------------------------------------------------------------------------- */
 char	*get_next_line(int fd);
 char	*create_segment(int fd, char *buf, int *full_line, ssize_t *char_read);
