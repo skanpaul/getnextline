@@ -20,8 +20,6 @@ char	*get_next_line(int fd)
 	static ssize_t	char_read = BUFFER_SIZE;
 	int				line_done;
 
-	if (fd < 0)
-		return (NULL);
 	line_done = 0;
 	line = ft_substr("", 0, 0);
 	while (line_done == 0)
