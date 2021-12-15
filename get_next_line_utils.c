@@ -12,18 +12,18 @@
 #include "get_next_line.h"
 
 /* ************************************************************************** */
-size_t	ft_strlen_gnl(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i] != '\n')
+	while (s[i] != '\0')
 		i++;
 	return (i);
 }
 
 /* ************************************************************************** */
-char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	s_len;
 	size_t	new_len;
@@ -34,7 +34,7 @@ char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 		return (0);
 	s_len = BUFFER_SIZE; // différent avec le vrai ft_substr
 	if (start > s_len)
-		return (ft_strdup_gnl("\n"));
+		return (ft_strdup("\0"));
 	if (len > s_len)
 		new_len = s_len - start + 1;
 	else
@@ -48,12 +48,12 @@ char	*ft_substr_gnl(char const *s, unsigned int start, size_t len)
 		new[i] = s[start + i];
 		i++;
 	}
-	new[i] = '\n';
+	new[i] = '\0';
 	return (new);
 }
 
 /* ************************************************************************** */
-char	*ft_strjoin_gnl(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	s1_len;
 	size_t	s2_len;	
@@ -62,20 +62,20 @@ char	*ft_strjoin_gnl(char const *s1, char const *s2)
 
 	if ((s1 == 0) | (s2 == 0))
 		return (NULL);
-	s1_len = ft_strlen_gnl(s1);
-	s2_len = ft_strlen_gnl(s2);
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
 	new_len = s1_len + s2_len + 1;
 	new = (char *)malloc(new_len * sizeof(char));
 	if (new == NULL)
 		return (NULL);
-	ft_memmove_gnl(new, s1, s1_len);
-	ft_memmove_gnl(new + s1_len, s2, s2_len);
-	new[new_len - 1] = '\n';
+	ft_memmove(new, s1, s1_len);
+	ft_memmove(new + s1_len, s2, s2_len);
+	new[new_len - 1] = '\0';
 	return (new);
 }
 
 /* ************************************************************************** */
-void	*ft_memmove_gnl(void *dst, const void *src, size_t len)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
 	size_t	i;
 
@@ -103,22 +103,22 @@ void	*ft_memmove_gnl(void *dst, const void *src, size_t len)
 	return (dst);
 }
 /* ************************************************************************** */
-char	*ft_strdup_gnl(const char *s1)
+char	*ft_strdup(const char *s1)
 {
 	size_t	i;
 	size_t	mem_len;
 	char	*new;
 
-	mem_len = ft_strlen_gnl(s1) + 1;
+	mem_len = ft_strlen(s1) + 1;
 	new = (char *)malloc(mem_len * sizeof(char));
 	if (new == 0)
 		return (0);
 	i = 0;
-	while (s1[i] != '\n')
+	while (s1[i] != '\0')
 	{
 		new[i] = s1[i];
 		i++;
 	}
-	new[i] = '\n';
+	new[i] = '\0';
 	return (new);
 }

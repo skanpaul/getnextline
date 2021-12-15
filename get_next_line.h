@@ -22,14 +22,12 @@
 # include <unistd.h>
 /* -------------------------------------------------------------------------- */
 char	*get_next_line(int fd);
-char    *create_segment(int fd, char *buf, int *full_line);
-
+char	*create_segment(int fd, char *buf, int *full_line, ssize_t *char_read);
 /* -------------------------------------------------------------------------- */
-char	*ft_substr_gnl(char const *s, unsigned int start, size_t len);
-char	*ft_strjoin_gnl(char const *s1, char const *s2);
-size_t	ft_strlen_gnl(const char *s);
-char	*ft_strdup_gnl(const char *s1);
-void	*ft_memmove_gnl(void *dst, const void *src, size_t len);
-
+char	*ft_substr(char const *s, unsigned int start, size_t len);
+char	*ft_strjoin(char const *s1, char const *s2);
+size_t	ft_strlen(const char *s);
+char	*ft_strdup(const char *s1);
+void	*ft_memmove(void *dst, const void *src, size_t len);
 /* ************************************************************************** */
-# endif
+#endif
