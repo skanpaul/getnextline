@@ -32,7 +32,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (0);
-	s_len = BUFFER_SIZE; // différent avec le vrai ft_substr
+	s_len = ft_strlen(s);
 	if (start > s_len)
 		return (ft_strdup("\0"));
 	if (len > s_len)
@@ -102,6 +102,7 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
+
 /* ************************************************************************** */
 char	*ft_strdup(const char *s1)
 {
